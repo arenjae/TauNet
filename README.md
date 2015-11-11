@@ -10,8 +10,8 @@ Outline:
 - Password (universal for a network) - "password"
 - IV thing (10 randomly chosen bytes that are appended to the password)
 - Address Book
+
 | IP Address      | Port  | Name     |
-| -------------- | ---- | ------- |
+| --------------- | ----- | -------- |
 | 71.236.233.214  | 22    | Rachael  |
 | 131.252.211.245 | 22    | Nathan   |
--
