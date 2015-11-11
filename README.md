@@ -2,10 +2,10 @@ TauNet
 =============
 ###Connecting Pies together since 2015
 
-This is a sample of a python program that uses the TauNet protocol to send and receive messages
+TauNet is a simple protocol to send and receive encrypted messages over a private network anywhere in the world.
 
 
-Outline:
+####Outline
 - RC4 <- algorithm to output a stream of random numbers (run key scheduler 20 times after each message received / and transmitted)
 - Password (universal for a network) - "password"
 - IV thing (10 randomly chosen bytes that are appended to the password)
