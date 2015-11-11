@@ -26,5 +26,3 @@ finally:
     log("Closing socket.")
     sock.shutdown(socket.SHUT_RDWR)
     sock.close()
-
-#Testing
