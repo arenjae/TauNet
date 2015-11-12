@@ -26,4 +26,15 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
     - search for python socket example
 
 #####Basic Code Outline:
-- 
+- Need an encrypt / decrypt function.
+    - Functions will decrypt a message or encrypt a message using protocol specified by Bart
+    
+- Listen() function for a specific port - any message sent to that port will be received, decrypted, and then displayed to the user
+- Send function (EncryptedStringToSend, AddressToSendTo)
+    - Function will send an inputted string to an address 
+    
+- Address Book
+
+- Main Screen 
+
+- Log
