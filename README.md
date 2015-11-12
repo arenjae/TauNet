@@ -18,3 +18,12 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 | --------------- | ----- | -------- |
 | 71.236.233.214  | 22    | Rachael  |
 | 131.252.211.245 | 22    | Nathan   |
+
+
+
+####Notes
+- Scapy (to send a package)
+    - search for python socket example
+
+#####Basic Code Outline:
+- 
