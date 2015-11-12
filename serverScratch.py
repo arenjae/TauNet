@@ -1,6 +1,6 @@
 import socket
 
-from tcp_tools import set_name, set_conn, log, pp_host, send, receive
+from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
 
 HOST_PAIR = ("127.0.0.1", 2001)
 
