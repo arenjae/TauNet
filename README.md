@@ -25,6 +25,8 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 - Scapy (to send a package)
     - search for python socket example
 
+- Need to use threads to continue receiving while sending a message so no message gets lost
+
 #####Basic Code Outline:
 - Need an encrypt / decrypt function.
     - Functions will decrypt a message or encrypt a message using protocol specified by Bart

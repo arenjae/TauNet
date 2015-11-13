@@ -72,10 +72,12 @@ def addressBook():
     return
 
 
-
 def MainScreen():
+
+
     print("Type a message:")
-    
+
+
     return
 
 MainScreen()
