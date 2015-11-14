@@ -75,12 +75,12 @@ def addressBook():
 
 
 def MainScreen():
-    message = str.encode(input("Type a message:"))
-    encryptedMessage = encrypt(message, password)
-    print(decrypt(encryptedMessage,password))
-
+    #message = input("Type a message:")
+    #encryptedMessage = encrypt(message, password)
+    #print(decrypt(encryptedMessage,password))
 
     return
 
 
-MainScreen()
+#MainScreen()
+
