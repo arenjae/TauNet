@@ -15,7 +15,7 @@ def set_conn(conn):
     CONN = conn
 
 def log(message):
-    print "[{}] {}".format(NAME, message)
+    print("[{}] {}".format(NAME, message))
 
 def pp_host(host_pair):
     return ":".join(map(str, host_pair))

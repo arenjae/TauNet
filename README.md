@@ -35,8 +35,20 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 - Send function (EncryptedStringToSend, AddressToSendTo)
     - Function will send an inputted string to an address 
     
-- Address Book
+- Address Book -should be a class - maybe a list
 
-- Main Screen 
+- Main Screen - should be a class, this should handle the threads to ensure a message is never missed
 
-- Log
+- Log - should be a class also
+
+
+#####Advance Code Outline:
+ - protocol.py 
+ - server.py
+ - client.py
+ - addressBook.py
+ - log.py
+ - TauNet.py
+    - Main handler for everything. This has a while loop that will keep looping until user decides to quit program
+    - It contains the main screen. If the user wants view messages, it calls the server class. If the user wants to send a message, it calls the addressBook class, has the user pick a person, then has the user choose
+     

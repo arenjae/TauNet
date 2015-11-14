@@ -2,7 +2,7 @@ import socket
 
 from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
 
-HOST_PAIR = ("127.0.0.1", 2001)
+HOST_PAIR = ("localhost", 2001)
 
 set_name("Client")
 
@@ -18,8 +18,6 @@ try:
     data = receive()
     if data:
         log("Got the flag!")
-except socket.error, e:
-    log("-!- {}".format(str(e)))
 except KeyboardInterrupt:
     log("Killed.")
 finally:
