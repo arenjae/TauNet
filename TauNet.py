@@ -25,7 +25,7 @@ def addressBookPopulate():
 
 
 def MainScreen():
-    serverThread = threading.Thread(target=server.server.startServer(server), args=())
+    #serverThread = threading.Thread(target=server.server.startServer(server), args=())
 
     # this should be a class on a separate thread that always receives. When
     # the user wishes to read his messages, call serverScratch.readMessages . Should read
@@ -44,7 +44,7 @@ def MainScreen():
         encryptedMessage = protocol.encrypt(message, password)
         print("Encrypted message: ", encryptedMessage)
 
-        clientThread = threading.Thread(target=client.client.clientStart(client, target), args=(message,))
+        clientThread = threading.Thread(target=client.client.clientStart(client, target,encryptedMessage), args=(message,))
         # this should be a class that I can send a message and an address too
         # and it will send
 

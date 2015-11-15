@@ -1,35 +1,37 @@
 import socket
+import protocol
 
 from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
 
-HOST_PAIR = ('localhost', 6031)
-
+password = str.encode('password')
 
 class server:
 
-    def startServer(self):
-
+    def __init__(self):
         set_name("Server")
+        self.host_pair = ('localhost',6031)
+        print("Server Initialized...")
+
+    def startServer(self):
+        print("Server Started...")
+        set_name("Server")
+        self.host_pair = ('localhost',6031)
 
         try:
-            log("Listening on {}.".format(pp_host(HOST_PAIR)))
+            log("Listening on {}.".format(pp_host(self.host_pair)))
             conn = None
             listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            listener.settimeout(3)
-            listener.bind(HOST_PAIR)
-            listener.listen(1)
+            listener.bind(self.host_pair)
+            listener.listen(10)
 
             conn, sender = listener.accept()
             set_conn(conn)
             log("Got a connection from {}.".format(pp_host(sender)))
-            data = True
-            while data and data != "FLAGPLS":
-                data = receive()
-                if data and data != "FLAGPLS":
-                    log("Ignoring.")
+            data = receive()
             if data:
-                send("><3>")
-                log("Sent the flag.")
+                send(str.encode("Message received by Rachael"))
+                log("Message successfully received")
+                print(protocol.decrypt(data, password))
             else:
                 log("Lost client.")
         except KeyboardInterrupt:
@@ -39,5 +41,3 @@ class server:
             if conn:
                 conn.shutdown(socket.SHUT_RDWR)
                 conn.close()
-
-
