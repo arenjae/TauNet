@@ -1,18 +1,23 @@
-#import clientScratch
-#import serverScratch
-
+import server
+import client
+import threading
 import protocol
 
 password = str.encode('password')
 addressBookList = list()
 log = list()
+PORT = 6031
+
 
 # address book
 def addressBook():
     print(addressBookList)
-    choice=input("Choose a person to send a message to: ")
+    target = input("Choose a person to send a message to: ")
 
-    return choice
+    # Delete this line after addressBook has been properly set up
+    target = ('localhost', PORT)
+    return target
+
 
 def addressBookPopulate():
     addressBookList.append("1. Rachael")
@@ -20,13 +25,11 @@ def addressBookPopulate():
 
 
 def MainScreen():
+    serverThread = threading.Thread(target=server.server.startServer(server), args=())
 
-    #clientScratch #this should be a class that I can send a message and an address too
-    #and it will send
-
-    #serverScratch #this should be a class on a separate thread that always receives. When
-    #the user wishes to read his messages, call serverScratch.readMessages . Should read
-    #messages every time user does something
+    # this should be a class on a separate thread that always receives. When
+    # the user wishes to read his messages, call serverScratch.readMessages . Should read
+    # messages every time user does something
 
     print("-----Main Menu------")
     print("What would you like to do?")
@@ -36,15 +39,20 @@ def MainScreen():
     userChoice = input(":")
 
     if userChoice == "1":
-        addressBook()
+        target = addressBook()
         message = input("Type a message:")
         encryptedMessage = protocol.encrypt(message, password)
         print("Encrypted message: ", encryptedMessage)
+
+        clientThread = threading.Thread(target=client.client.clientStart(client, target), args=(message,))
+        # this should be a class that I can send a message and an address too
+        # and it will send
+
         print("Decrypted message: ", protocol.decrypt(encryptedMessage, password))
 
     else:
-        #serverScratch.viewMessages
         print("Viewing messages..")
+        # serverThread.viewMessages
 
     return
 

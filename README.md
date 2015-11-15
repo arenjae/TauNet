@@ -52,3 +52,17 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
     - Main handler for everything. This has a while loop that will keep looping until user decides to quit program
     - It contains the main screen. If the user wants view messages, it calls the server class. If the user wants to send a message, it calls the addressBook class, has the user pick a person, then has the user choose
      
+     
+     
+          import threading
+
+def worker(num):
+    """thread worker function"""
+    print 'Worker: %s' % num
+    return
+
+threads = []
+for i in range(5):
+    t = threading.Thread(target=worker, args=(i,))
+    threads.append(t)
+    t.start()
