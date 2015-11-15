@@ -16,7 +16,7 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 ####Address Book
 | IP Address      | Port  | Name     |
 | --------------- | ----- | -------- |
-| 71.236.233.214  | 22    | Rachael  |
+| pi.arenjae.com  | 6283  | Rachael  |
 | 131.252.211.245 | 22    | Nathan   |
 
 
