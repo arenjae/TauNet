@@ -1,6 +1,6 @@
 import socket
 import protocol
-from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
+from tcpTools import set_name, set_conn, log, pp_host, send, receive
 
 password = str.encode('password')
 

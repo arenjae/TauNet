@@ -1,5 +1,5 @@
 import socket
-from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
+from tcpTools import set_name, set_conn, log, pp_host, send, receive
 
 
 # HOST_PAIR = ('localhost', 2001)
