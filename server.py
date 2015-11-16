@@ -25,21 +25,25 @@ class server:
             conn = None
             listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             listener.bind(self.host_pair)
-            listener.listen(10)
 
-            conn, sender = listener.accept()
-            set_conn(conn)
-            log("Got a connection from {}.".format(pp_host(sender)))
-            data = receive()
-            if data:
-                send(str.encode("Message received by Rachael"))
-                log("Message successfully received")
-                log("Message decrypted")
-                log("Message: " + str(protocol.decrypt(data, password)))
-            else:
-                log("Lost client.")
+            while True:
+                listener.listen(10)
+
+                conn, sender = listener.accept()
+                set_conn(conn)
+                log("Got a connection from {}.".format(pp_host(sender)))
+                data = receive()
+                if data:
+                    send(str.encode("Message received by Rachael"))
+                    log("Message successfully received")
+                    log("Message decrypted")
+                    log("Message: " + str(protocol.decrypt(data, password)))
+                else:
+                    log("Lost client.")
+
         except KeyboardInterrupt:
             log("Killed.")
+
         finally:
             log("Closing socket.")
             if conn:

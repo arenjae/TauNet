@@ -13,13 +13,15 @@ PORT = 6283
 # address book
 def addressBook():
     print(addressBookNameList)
-    target = (addressBookAddressList[int(input("Choose a person to send a message to: "))-1], PORT)
+    target = (addressBookAddressList[int(input("Choose a person to send a message to: ")) - 1], PORT)
 
     return target
 
 
+# In the future this will load a file of addresses/usernames
 def addressBookPopulate():
     pass
+
 
 def MainScreen():
     serverThread = threading.Thread(target=server.server.startServer(server), args=())
@@ -41,11 +43,12 @@ def MainScreen():
         encryptedMessage = protocol.encrypt(message, password)
         print("Encrypted message: ", encryptedMessage)
 
-        clientThread = threading.Thread(target=client.client.clientStart(client, target,encryptedMessage), args=(message,))
+        clientThread = threading.Thread(target=client.client.clientStart(client, target, encryptedMessage),
+                                        args=(message,))
         # this should be a class that I can send a message and an address too
         # and it will send
 
-        #Replace this line with a server call to display all messages
+        # Replace this line with a server call to display all messages
 
     elif userChoice == 2:
         print("Viewing messages..")
@@ -55,7 +58,7 @@ def MainScreen():
 
     return
 
+
 addressBookPopulate()
 while True:
     MainScreen()
-
