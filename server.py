@@ -15,8 +15,9 @@ class server:
         print("Server Initialized...")
 
     def startServer(self):
-        log("Server Started...")
+
         set_name("Server")
+        log("Server Started...")
         self.host_pair = (host, PORT)
 
         try:
@@ -33,7 +34,8 @@ class server:
             if data:
                 send(str.encode("Message received by Rachael"))
                 log("Message successfully received")
-                print(protocol.decrypt(data, password))
+                log("Message decrypted")
+                log("Message: " + str(protocol.decrypt(data, password)))
             else:
                 log("Lost client.")
         except KeyboardInterrupt:
