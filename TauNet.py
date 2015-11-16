@@ -22,7 +22,7 @@ def addressBookPopulate():
     pass
 
 def MainScreen():
-    #serverThread = threading.Thread(target=server.server.startServer(server), args=())
+    serverThread = threading.Thread(target=server.server.startServer(server), args=())
 
     # this should be a class on a separate thread that always receives. When
     # the user wishes to read his messages, call serverScratch.readMessages . Should read
