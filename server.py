@@ -1,21 +1,23 @@
 import socket
 import protocol
-
 from tcp_toolsScratch import set_name, set_conn, log, pp_host, send, receive
 
 password = str.encode('password')
 
-class server:
+PORT = 6283
+host = 'pi.arenjae.com'
+host = 'localhost'
 
+class server:
     def __init__(self):
         set_name("Server")
-        self.host_pair = ('localhost',6031)
+        self.host_pair = ('localhost', PORT)
         print("Server Initialized...")
 
     def startServer(self):
-        print("Server Started...")
+        log("Server Started...")
         set_name("Server")
-        self.host_pair = ('localhost',6031)
+        self.host_pair = (host, PORT)
 
         try:
             log("Listening on {}.".format(pp_host(self.host_pair)))

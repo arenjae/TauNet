@@ -4,28 +4,25 @@ import threading
 import protocol
 
 password = str.encode('password')
-addressBookList = list()
+addressBookNameList = ("1. Rachael", "2. Nathan")
+addressBookAddressList = ('pi.arenjae.com', '131.252.211.245')
 log = list()
-PORT = 6031
+PORT = 6283
 
 
 # address book
 def addressBook():
-    print(addressBookList)
-    target = input("Choose a person to send a message to: ")
+    print(addressBookNameList)
+    target = (addressBookAddressList[int(input("Choose a person to send a message to: "))-1], PORT)
 
-    # Delete this line after addressBook has been properly set up
-    target = ('localhost', PORT)
     return target
 
 
 def addressBookPopulate():
-    addressBookList.append("1. Rachael")
-    addressBookList.append("2. Nathan")
-
+    pass
 
 def MainScreen():
-    #serverThread = threading.Thread(target=server.server.startServer(server), args=())
+    serverThread = threading.Thread(target=server.server.startServer(server), args=())
 
     # this should be a class on a separate thread that always receives. When
     # the user wishes to read his messages, call serverScratch.readMessages . Should read
@@ -48,7 +45,7 @@ def MainScreen():
         # this should be a class that I can send a message and an address too
         # and it will send
 
-        print("Decrypted message: ", protocol.decrypt(encryptedMessage, password))
+        #Replace this line with a server call to display all messages
 
     else:
         print("Viewing messages..")
