@@ -47,12 +47,15 @@ def MainScreen():
 
         #Replace this line with a server call to display all messages
 
-    else:
+    elif userChoice == 2:
         print("Viewing messages..")
         # serverThread.viewMessages
+    else:
+        print("That is not a valid choice...")
 
     return
 
-
 addressBookPopulate()
-MainScreen()
+while True:
+    MainScreen()
+
