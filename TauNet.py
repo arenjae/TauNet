@@ -6,6 +6,7 @@ import server
 import client
 import threading
 import protocol
+from os import _exit
 
 password = str.encode('password')
 addressBookNameList = ("1. Rachael", "2. Nathan", "3. Yourself (for testing purposes")
@@ -64,3 +65,5 @@ serverThread.start()
 addressBookPopulate()
 while MainScreen():
     pass
+
+_exit(0)

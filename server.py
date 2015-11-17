@@ -8,7 +8,7 @@ password = str.encode('password')
 
 PORT = 6283
 host = 'pi.arenjae.com'
-host = 'localhost'
+#host = 'localhost'
 
 
 class server (threading.Thread):
