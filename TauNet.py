@@ -41,7 +41,6 @@ def MainScreen():
         target = addressBook()
         message = input("Type a message:")
         encryptedMessage = protocol.encrypt(message, password)
-        print("Encrypted message: ", encryptedMessage)
 
         clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
         clientThread.start()

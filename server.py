@@ -7,9 +7,8 @@ messages = []
 password = str.encode('password')
 
 PORT = 6283
-host = 'pi.arenjae.com'
-#host = 'localhost'
-
+host = 'localhost'
+#host = '192.168.1.141'
 
 class server (threading.Thread):
     def run(self):
