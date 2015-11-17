@@ -1,5 +1,6 @@
-
-#Graham Drakeley, drak2@pdx.edu, 503.367.2337
+# Copyright (C) 2015 Rachael Johnson arenjae.com, email: rj@arenjae.com
+# Created with in collaboration with Graham Drakeley, drak2@pdx.edu
+# and Nathan Reed natreed@pdx.edu
 
 import server
 import client
@@ -11,6 +12,7 @@ addressBookNameList = ("1. Rachael", "2. Nathan", "3. Yourself (for testing purp
 addressBookAddressList = ('pi.arenjae.com', '131.252.211.245', 'localhost')
 log = list()
 PORT = 6283
+
 
 # address book
 def addressBook():
@@ -40,13 +42,8 @@ def MainScreen():
         encryptedMessage = protocol.encrypt(message, password)
         print("Encrypted message: ", encryptedMessage)
 
-        #clientThread = threading.Thread(target=client.client.clientStart(client, target, encryptedMessage),
-        #                               args=(message,))
-
         clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
         clientThread.start()
-
-        # Replace this line with a server call to display all messages
 
     elif userChoice == "2":
         print("Viewing messages..")
@@ -60,6 +57,7 @@ def MainScreen():
         print("That is not a valid choice...")
 
     return True
+
 
 serverThread = server.server()
 serverThread.start()
