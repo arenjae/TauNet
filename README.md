@@ -34,10 +34,14 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 - Listen() function for a specific port - any message sent to that port will be received, decrypted, and then displayed to the user
 - Send function (EncryptedStringToSend, AddressToSendTo)
     - Function will send an inputted string to an address 
-    
-- Address Book -should be a class - maybe a list
+    - select statement a readable - to check for a closed port
+        
+- Address Book -should read in a text file and convert to two lists - one with user names, and the other with user addresses
+    - Text file should have one line per user / address
+    - username should come first, followed by a space, followed by a address
 
 - Main Screen - should be a class, this should handle the threads to ensure a message is never missed
+    -Look up asyncio for python - might be what we need
 
 - Log - should be a class also
 
@@ -52,16 +56,3 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
     - It contains the main screen. If the user wants view messages, it calls the server class. If the user wants to send a message, it calls the addressBook class, has the user pick a person, then has the user choose
      
      
-     
-          import threading
-
-def worker(num):
-    """thread worker function"""
-    print 'Worker: %s' % num
-    return
-
-threads = []
-for i in range(5):
-    t = threading.Thread(target=worker, args=(i,))
-    threads.append(t)
-    t.start()

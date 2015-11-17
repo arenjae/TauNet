@@ -1,3 +1,6 @@
+
+#Graham Drakeley, drak2@pdx.edu, 503.367.2337
+
 import server
 import client
 import threading
@@ -8,7 +11,6 @@ addressBookNameList = ("1. Rachael", "2. Nathan", "3. Yourself (for testing purp
 addressBookAddressList = ('pi.arenjae.com', '131.252.211.245', 'localhost')
 log = list()
 PORT = 6283
-
 
 # address book
 def addressBook():
@@ -24,16 +26,11 @@ def addressBookPopulate():
 
 
 def MainScreen():
-    serverThread = threading.Thread(target=server.server.startServer(server), args=())
-
-    # this should be a class on a separate thread that always receives. When
-    # the user wishes to read his messages, call serverScratch.readMessages . Should read
-    # messages every time user does something
-
     print("-----Main Menu------")
     print("What would you like to do?")
     print("1. Send Message")
     print("2. View Messages")
+    print("3. Quit")
     print("-----------------")
     userChoice = input(":")
 
@@ -43,22 +40,29 @@ def MainScreen():
         encryptedMessage = protocol.encrypt(message, password)
         print("Encrypted message: ", encryptedMessage)
 
-        clientThread = threading.Thread(target=client.client.clientStart(client, target, encryptedMessage),
-                                        args=(message,))
-        # this should be a class that I can send a message and an address too
-        # and it will send
+        #clientThread = threading.Thread(target=client.client.clientStart(client, target, encryptedMessage),
+        #                               args=(message,))
+
+        clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
+        clientThread.start()
 
         # Replace this line with a server call to display all messages
 
-    elif userChoice == 2:
+    elif userChoice == "2":
         print("Viewing messages..")
-        # serverThread.viewMessages
+        for msg in server.messages:
+            print((msg))
+
+    elif userChoice == "3":
+        return False
+
     else:
         print("That is not a valid choice...")
 
-    return
+    return True
 
-
+serverThread = server.server()
+serverThread.start()
 addressBookPopulate()
-while True:
-    MainScreen()
+while MainScreen():
+    pass

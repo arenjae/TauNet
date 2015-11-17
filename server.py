@@ -1,51 +1,58 @@
 import socket
 import protocol
-from tcpTools import set_name, set_conn, log, pp_host, send, receive
+import threading
+import select
 
+messages = []
 password = str.encode('password')
 
 PORT = 6283
 host = 'pi.arenjae.com'
 host = 'localhost'
 
-class server:
-    def __init__(self):
-        set_name("Server")
-        self.host_pair = ('localhost', PORT)
-        print("Server Initialized...")
 
-    def startServer(self):
+class server (threading.Thread):
+    def run(self):
 
-        set_name("Server")
-        log("Server Started...")
+        print("Server Started...")
         self.host_pair = (host, PORT)
 
         try:
-            log("Listening on {}.".format(pp_host(self.host_pair)))
+            print("Listening on {}:{}.".format(*self.host_pair))
             conn = None
             listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             listener.bind(self.host_pair)
+            listener.listen(10)
 
             while True:
-                listener.listen(10)
-
                 conn, sender = listener.accept()
-                set_conn(conn)
-                log("Got a connection from {}.".format(pp_host(sender)))
-                data = receive()
-                if data:
-                    send(str.encode("Message received by Rachael"))
-                    log("Message successfully received")
-                    log("Message decrypted")
-                    log("Message: " + str(protocol.decrypt(data, password)))
-                else:
-                    log("Lost client.")
+                threading.Thread(target=getMessage, args=(conn,)).start()
 
         except KeyboardInterrupt:
-            log("Killed.")
+            print("Killed.")
+
+        except:
+            print("Lol you dieded")
 
         finally:
-            log("Closing socket.")
+            print("Closing socket.")
             if conn:
                 conn.shutdown(socket.SHUT_RDWR)
                 conn.close()
+
+
+
+def getMessage(conn):
+    readable, writable, exceptional = select.select([conn], [], [])
+    buffer = b""
+    for s in readable:
+        while True:
+            temp = s.recv(256)
+            if temp:
+                buffer += temp
+            else:
+                s.close()
+                break;
+    messages.append(protocol.decrypt(buffer, password))
+
