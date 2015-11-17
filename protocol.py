@@ -1,3 +1,7 @@
+# Copyright (C) 2015 Rachael Johnson arenjae.com, email: rj@arenjae.com
+# Created with in collaboration with Graham Drakeley, drak2@pdx.edu
+# and Nathan Reed natreed@pdx.edu
+
 from os import urandom
 password = str.encode('password')
 REPS = 200
