@@ -9,25 +9,38 @@ import protocol
 from os import _exit
 
 password = str.encode('password')
-addressBookNameList = ("1. Rachael", "2. Nathan", "3. Yourself (for testing purposes")
-addressBookAddressList = ('pi.arenjae.com', '131.252.211.245', 'localhost')
-log = list()
 PORT = 6283
 
+addressNames = []
+addressList = []
+log = []
+PORT = 6283
+addressFile = 'addresses.txt'
 
 # address book
 def addressBook():
-    print(addressBookNameList)
-    target = (addressBookAddressList[int(input("Choose a person to send a message to: ")) - 1], PORT)
-
+    for i in range(addressList.__len__()):
+        print(i+1, ". ", addressNames[i])
+    target = (addressList[int(input("Choose a person to send a message to: "))-1], PORT)
     return target
 
 
-# In the future this will load a file of addresses/usernames
 def addressBookPopulate():
-    pass
+    count = 0
+    with open(addressFile, 'r') as f:
+        addressBook = f.readlines()
+    with open(addressFile, 'r') as f:
+        for line in f:
+            count += 1
+    for i in range(count):
+        b = addressBook[i].split()
+        addressNames.append(b[0])
+        addressList.append(b[1])
+    addressNames.append('Test')
+    addressList.append('localhost')
 
 
+# Main Screen, user always returns to this screen
 def MainScreen():
     print("-----Main Menu------")
     print("What would you like to do?")
@@ -58,7 +71,7 @@ def MainScreen():
 
     return True
 
-
+#This is where the program really starts
 serverThread = server.server()
 serverThread.start()
 addressBookPopulate()
