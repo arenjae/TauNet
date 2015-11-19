@@ -14,7 +14,6 @@ PORT = 6283
 addressNames = []
 addressList = []
 log = []
-PORT = 6283
 addressFile = 'addresses.txt'
 
 # address book
@@ -24,7 +23,7 @@ def addressBook():
     target = (addressList[int(input("Choose a person to send a message to: "))-1], PORT)
     return target
 
-
+# Adds addresses and usernames from addresses.txt to a dictionary
 def addressBookPopulate():
     count = 0
     with open(addressFile, 'r') as f:
