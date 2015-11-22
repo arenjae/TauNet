@@ -15,66 +15,76 @@ addressNames = []
 addressList = []
 log = []
 addressFile = 'addresses.txt'
+strFrom = "From: Rachael\n"
+strVersion = "v0.1\n"
+
 
 # address book
 def addressBook():
-    for i in range(addressList.__len__()):
-        print(i+1, ". ", addressNames[i])
-    target = (addressList[int(input("Choose a person to send a message to: "))-1], PORT)
-    return target
+	for i in range(addressList.__len__()):
+		print(i + 1, ". ", addressNames[i])
+	intTarget = int(input("Choose a person to send a message to: "))
+	target = (addressList[intTarget - 1], PORT)
+
+	global strTo
+	strTo = "To: " + addressNames[intTarget - 1] + "\n"
+
+	return target
+
 
 # Adds addresses and usernames from addresses.txt to a dictionary
 def addressBookPopulate():
-    count = 0
-    with open(addressFile, 'r') as f:
-        addressBook = f.readlines()
-    with open(addressFile, 'r') as f:
-        for line in f:
-            count += 1
-    for i in range(count):
-        b = addressBook[i].split()
-        addressNames.append(b[0])
-        addressList.append(b[1])
-    addressNames.append('Test')
-    addressList.append('localhost')
+	count = 0
+	with open(addressFile, 'r') as f:
+		addressBook = f.readlines()
+	with open(addressFile, 'r') as f:
+		for line in f:
+			count += 1
+	for i in range(count):
+		b = addressBook[i].split()
+		addressNames.append(b[0])
+		addressList.append(b[1])
+	addressNames.append('Test')
+	addressList.append('localhost')
 
 
 # Main Screen, user always returns to this screen
 def MainScreen():
-    print("-----Main Menu------")
-    print("What would you like to do?")
-    print("1. Send Message")
-    print("2. View Messages")
-    print("3. Quit")
-    print("-----------------")
-    userChoice = input(":")
+	print("-----Main Menu------")
+	print("What would you like to do?")
+	print("1. Send Message")
+	print("2. View Messages")
+	print("3. Quit")
+	print("-----------------")
+	userChoice = input(":")
 
-    if userChoice == "1":
-        target = addressBook()
-        message = input("Type a message:")
-        encryptedMessage = protocol.encrypt(message, password)
+	if userChoice == "1":
+		target = addressBook()
+		message = input("Type a message:")
+		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + message, password)
 
-        clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
-        clientThread.start()
+		clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
+		clientThread.start()
 
-    elif userChoice == "2":
-        print("Viewing messages..")
-        for msg in server.messages:
-            print((msg))
+	elif userChoice == "2":
+		print("Viewing messages..")
+		for msg in server.messages:
+			print((msg))
 
-    elif userChoice == "3":
-        return False
+	elif userChoice == "3":
+		return False
 
-    else:
-        print("That is not a valid choice...")
+	else:
+		print("That is not a valid choice...")
 
-    return True
+	return True
 
-#This is where the program really starts
+
+# This is where the program really starts
 serverThread = server.server()
 serverThread.start()
 addressBookPopulate()
 while MainScreen():
-    pass
+	pass
 
 _exit(0)
