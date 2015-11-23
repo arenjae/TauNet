@@ -57,5 +57,5 @@ def getMessage(conn):
             else:
                 s.close()
                 break;
-    messages.append(protocol.decrypt(buffer, password))
+    messages.append(protocol.decrypt(buffer, password).decode('ascii') + '\n')
 
