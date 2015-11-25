@@ -5,7 +5,7 @@
 from os import urandom
 
 password = str.encode('password')
-REPS = 200
+REPS = 20
 
 
 def swap(l, a, b):
