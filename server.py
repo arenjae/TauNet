@@ -12,7 +12,8 @@ password = str.encode('password')
 
 PORT = 6283
 host = 'localhost'
-#host = '192.168.1.141'
+# host = '192.168.1.141'
+
 
 class server (threading.Thread):
     def run(self):

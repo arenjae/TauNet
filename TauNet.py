@@ -15,8 +15,8 @@ addressNames = []
 addressList = []
 log = []
 addressFile = 'addresses.txt'
-strFrom = "From: Rachael\n"
-strVersion = "v0.1\n"
+strFrom = "from: rhatchet\r\n"
+strVersion = "version: v0.1\r\n"
 
 
 # address book
@@ -27,7 +27,7 @@ def addressBook():
 	target = (addressList[intTarget - 1], PORT)
 
 	global strTo
-	strTo = "To: " + addressNames[intTarget - 1] + "\n"
+	strTo = "to: " + addressNames[intTarget - 1] + "\r\n"
 
 	return target
 
