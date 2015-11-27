@@ -54,7 +54,6 @@ def decrypt(message, password):
 	iv = message[0:10]
 	passIV = password + bytes(iv)
 
-	print("Message to Decrypt: " + str(message[0:10]) + ":" + str(message[10:len(message)]))
 	message = message[10:len(message)]
 	keystream = rc4(len(message), passIV)
 	plaintext = ""

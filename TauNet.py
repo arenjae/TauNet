@@ -7,7 +7,6 @@ import client
 import threading
 import protocol
 from os import _exit
-from os import path
 
 password = str.encode('asdfg')
 PORT = 6283
@@ -82,15 +81,6 @@ def MainScreen():
 		print("That is not a valid choice...")
 
 	return True
-
-def testNewRC4():
-	testPath = 'cstest1.cs1'
-	infile= open(testPath, 'rb')
-	message = infile.read()
-	print("Decrypted:" + protocol.decrypt(message, password))
-
-testNewRC4()
-_exit(0)
 
 # This is where the program really starts
 serverThread = server.server()
