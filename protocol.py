@@ -17,9 +17,6 @@ def swap(l, a, b):
 def rc4(messageLen, password):
 	passLen = len(password)
 	S = list(range(256))
-	for i in range(256):
-		S[i] = i
-
 	j = 0
 	for r in range(REPS):
 		for i in range(256):
