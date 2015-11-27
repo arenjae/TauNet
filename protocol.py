@@ -15,7 +15,7 @@ def swap(l, a, b):
 
 def rc4(messageLen, password):
 	passLen = len(password)
-	S = bytearray(range(256))
+	S = list(range(256))
 	for i in range(256):
 		S[i] = i
 
@@ -25,7 +25,7 @@ def rc4(messageLen, password):
 			j = (j + S[i] + password[i % passLen]) % 256
 			swap(S, i, j)
 
-	keystream = bytearray(range(messageLen))
+	keystream = list(range(messageLen))
 
 	j = 0
 	for i in range(messageLen):
@@ -54,10 +54,10 @@ def decrypt(message, password):
 	iv = message[0:10]
 	passIV = password + bytes(iv)
 
-	print("Decrypt message: " + str(message[0:10]) + ":" + str(message[10:len(message)]))
+	print("Message to Decrypt: " + str(message[0:10]) + ":" + str(message[10:len(message)]))
 	message = message[10:len(message)]
 	keystream = rc4(len(message), passIV)
-	plaintext = bytearray(range(len(message)))
+	plaintext = ""
 	for i in range(len(message)):
-		plaintext[i] = message[i] ^ keystream[i]
+		plaintext += chr(message[i] ^ keystream[i])
 	return str(plaintext)
