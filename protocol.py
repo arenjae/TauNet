@@ -13,6 +13,7 @@ def swap(l, a, b):
 	l[a] = l[b]
 	l[b] = temp
 
+
 def rc4(messageLen, password):
 	passLen = len(password)
 	S = list(range(256))
@@ -40,14 +41,13 @@ def rc4(messageLen, password):
 def encrypt(message, password):
 	messageLen = len(message)
 	iv = urandom(10)
-	print("IV: " + str(iv))
 	keystream = rc4(messageLen, password + iv)
 	ciphertext = list(range(messageLen + 10))
 	for i in range(10):
 		ciphertext[i] = iv[i]
 	for i in range(messageLen):
 		ciphertext[i + 10] = ord(message[i]) ^ keystream[i]
-	return ciphertext
+	return bytes(ciphertext)
 
 
 def decrypt(message, password):

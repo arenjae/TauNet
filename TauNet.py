@@ -8,7 +8,7 @@ import threading
 import protocol
 from os import _exit
 
-password = str.encode('asdfg')
+password = str.encode('password')
 PORT = 6283
 
 addressNames = []
@@ -21,7 +21,7 @@ strVersion = "version: v0.1\r\n"
 
 # address book
 def addressBook():
-	for i in range(len(addressBook())):
+	for i in range(len(addressNames)):
 		print(i + 1, ". ", addressNames[i])
 	intTarget = int(input("Choose a person to send a message to: "))
 	target = (addressList[intTarget - 1], PORT)
