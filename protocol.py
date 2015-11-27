@@ -4,7 +4,6 @@
 
 from os import urandom
 
-password = str.encode('password')
 REPS = 20
 
 
@@ -14,47 +13,51 @@ def swap(l, a, b):
 	l[a] = l[b]
 	l[b] = temp
 
+def rc4(messageLen, password):
+	passLen = len(password)
+	S = bytearray(range(256))
+	for i in range(256):
+		S[i] = i
 
-def rc4(message, password):
-	i = 0
-	state = list(range(256))
-	key = list(range(256))
-	cipher = b""
-	for a in range(REPS):
-		while i < 256:
-			ctemp = password[i % len(password):(i % len(password)) + 1]
-			key[i] = ord(ctemp)
-			state[i] = i
-			i += 1
-	i = j = 0
-	while i < 256:
-		j = (j + state[i] + key[i]) % 256
-		swap(state, i, j)
-		i += 1
-	a = 1
-	while a <= len(message):
-		i = (i + 1) % 256
-		j = (j + state[i]) % 256
-		swap(state, i, j)
-		k = state[(state[i] + state[j]) % 256]
-		ctemp = message[a - 1:a]
-		itemp = ord(ctemp)
-		cipherbyte = itemp ^ k
-		cipherbyte = bytes([cipherbyte])  # change to byte
-		cipher += cipherbyte
-		a += 1
-	return cipher
+	j = 0
+	for r in range(REPS):
+		for i in range(256):
+			j = (j + S[i] + password[i % passLen]) % 256
+			swap(S, i, j)
+
+	keystream = bytearray(range(messageLen))
+
+	j = 0
+	for i in range(messageLen):
+		tempi = (i + 1) % 256
+		j = (j + S[tempi]) % 256
+		swap(S, tempi, j)
+		keystream[i] = S[(S[tempi] + S[j]) % 256]
+
+	return keystream
 
 
 def encrypt(message, password):
+	messageLen = len(message)
 	iv = urandom(10)
-	password += iv
-	encryptedMessage = rc4(message, password)
-	return iv + encryptedMessage  # concatenate iv and encrypted message
+	print("IV: " + str(iv))
+	keystream = rc4(messageLen, password + iv)
+	ciphertext = list(range(messageLen + 10))
+	for i in range(10):
+		ciphertext[i] = iv[i]
+	for i in range(messageLen):
+		ciphertext[i + 10] = ord(message[i]) ^ keystream[i]
+	return ciphertext
 
 
 def decrypt(message, password):
-	iv = message[0:10]  # grab iv from first 10 characters of message
-	password += iv  # add iv to password
-	message = message[10:message.__len__()]  # real message to decrypt is without the IV
-	return rc4(message, password)  # decrypt and return decrypted message
+	iv = message[0:10]
+	passIV = password + bytes(iv)
+
+	print("Decrypt message: " + str(message[0:10]) + ":" + str(message[10:len(message)]))
+	message = message[10:len(message)]
+	keystream = rc4(len(message), passIV)
+	plaintext = bytearray(range(len(message)))
+	for i in range(len(message)):
+		plaintext[i] = message[i] ^ keystream[i]
+	return str(plaintext)

@@ -7,8 +7,9 @@ import client
 import threading
 import protocol
 from os import _exit
+from os import path
 
-password = str.encode('password')
+password = str.encode('asdfg')
 PORT = 6283
 
 addressNames = []
@@ -21,7 +22,7 @@ strVersion = "version: v0.1\r\n"
 
 # address book
 def addressBook():
-	for i in range(addressList.__len__()):
+	for i in range(len(addressBook())):
 		print(i + 1, ". ", addressNames[i])
 	intTarget = int(input("Choose a person to send a message to: "))
 	target = (addressList[intTarget - 1], PORT)
@@ -82,11 +83,20 @@ def MainScreen():
 
 	return True
 
+def testNewRC4():
+	testPath = 'cstest1.cs1'
+	infile= open(testPath, 'rb')
+	message = infile.read()
+	print("Decrypted:" + protocol.decrypt(message, password))
+
+testNewRC4()
+_exit(0)
 
 # This is where the program really starts
 serverThread = server.server()
 serverThread.start()
 addressBookPopulate()
+
 while MainScreen():
 	pass
 
