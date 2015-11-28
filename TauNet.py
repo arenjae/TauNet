@@ -65,7 +65,7 @@ def MainScreen():
 		while len(message.encode('utf-8')) > 94:  # restrict message to 94 bytes
 			message = input("Message is too long. \nType a message:")
 
-		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + message, password)
+		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + message, password)
 		clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
 		clientThread.start()
 
