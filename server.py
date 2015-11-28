@@ -6,6 +6,7 @@ import socket
 import protocol
 import threading
 import select
+import datetime
 
 messages = []
 password = str.encode('password')
@@ -59,4 +60,4 @@ def getMessage(conn):
 			else:
 				s.close()
 				break;
-	messages.append(protocol.decrypt(buffer, password) + '\n')
+	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p"))

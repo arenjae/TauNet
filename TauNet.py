@@ -50,12 +50,12 @@ def addressBookPopulate():
 
 # Main Screen, user always returns to this screen
 def MainScreen():
-	print("-----Main Menu------")
+	print("--------Main Menu---------")
 	print("What would you like to do?")
 	print("1. Send Message")
 	print("2. View Messages")
 	print("3. Quit")
-	print("-----------------")
+	print("--------------------------")
 	userChoice = input(":")
 
 	if userChoice == "1":
@@ -90,4 +90,5 @@ addressBookPopulate()
 while MainScreen():
 	pass
 
+print("\nQuiting TauNet...")
 _exit(0)
