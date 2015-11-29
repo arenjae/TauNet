@@ -1,23 +1,19 @@
 TauNet
 =============
-###Connecting Pies together since 2015
-##Copyright (c) 2015 Rachael Johnson
+##Connecting Pies together since 2015
+###Copyright (c) 2015 Rachael Johnson
 TauNet is a simple protocol to send and receive encrypted messages over a private network anywhere in the world.
 
+###To Use
+Download all files (excluding docs)
+In your raspberryPi Terminal, type
+>```
+>python3 TauNet.py
+>```
 
-####Outline
-- RC4 <- algorithm to output a stream of random numbers (run key scheduler 20 times after each message received / and transmitted)
+####Current Settings
+- CipherSaber2 <- algorithm to output a stream of random numbers (run key scheduler 20 times after each message received / and transmitted)
 - Password (universal for a network) - "password"
-- IV thing (10 randomly chosen bytes that are appended to the password)
-- Address Book
-- Log (to store unsent messages)
-
-
-####Address Book
-| IP Address      | Port  | Name     |
-| --------------- | ----- | -------- |
-| pi.arenjae.com  | 6283  | Rachael  |
-| 131.252.211.245 | 22    | Nathan   |
 
 
 
