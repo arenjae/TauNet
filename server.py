@@ -50,7 +50,7 @@ class server(threading.Thread):
 
 
 def getMessage(conn):
-	readable, writable, exceptional = select.select([conn], [], [], 2)
+	readable, writable, exceptional = select.select([conn], [], [], 5)
 	buffer = b""
 	for s in readable:
 			buffer = s.recv(1024)

@@ -18,3 +18,6 @@ aldridge85	csjosh.ddns.net
 etsai	etsai.ddns.net
 jbucklin	jbucklin.ddns.net
 po8	po8.org
+mantron	mantron.ddns.net
+jojen2	itsjonnyjyo.ddns.net
+cort	wyeast.ddns.net
