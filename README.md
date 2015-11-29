@@ -18,14 +18,13 @@ python3 TauNet.py
 ###Current Compatibility
 This program is currently compatible with the following TauNet implementations
 
-| username | address | 
-| ----------- | -------- |
-| tdulcet | tealdulcet.ddns.net |
-| chupacabra | chupa-cabra.ddns.net |
-| paolo2 | pirr.ddns.net |
-| cort | wyeast.ddns.net |
+| username    | address              | 
+| ----------- | -------------------- |
+| tdulcet     | tealdulcet.ddns.net  |
+| chupacabra  | chupa-cabra.ddns.net |
+| paolo2      | pirr.ddns.net        |
+| cort        | wyeast.ddns.net      |
    
    
 ##Bugs
- - Need error handling when a connection has an error (error 111)
- - Need to make sure sockets are being closed after a connection is done
+- None so far!
