@@ -27,6 +27,7 @@ This program is currently compatible with the following TauNet implementations
 | chupacabra  | chupa-cabra.ddns.net |
 | paolo2      | pirr.ddns.net        |
 | cort        | wyeast.ddns.net      |
+| mrme        | mrme.ddns.net        |
    
    
 ##Bugs
