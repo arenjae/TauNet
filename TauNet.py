@@ -38,7 +38,7 @@ def addressBookPopulate():
 	with open(addressFile, 'r') as f:
 		addressBook = f.readlines()
 	with open(addressFile, 'r') as f:
-		for line in f:
+		for _ in f:
 			count += 1
 	for i in range(count):
 		b = addressBook[i].split()
@@ -46,6 +46,24 @@ def addressBookPopulate():
 		addressList.append(b[1])
 	addressNames.append('Test')
 	addressList.append('localhost')
+
+def openLog():
+	print("Opening Log...")
+	if len(client.logTarget) == 0:
+		print("\nNo messages in Log")
+		return
+	for i in range(len(client.logTarget)):
+		print(i+1, ".")
+		print("To: " + str(client.logTarget[i]))
+		print("Message: \n" + client.logMessage[i])
+		print("---------------------------")
+
+
+	userChoice = int(input("Select a log message: "))
+	if 0 < userChoice <= len(client.logTarget):
+		logMenu(userChoice-1)
+	else:
+		print("That is not a valid choice, returning to Main Menu...")
 
 
 def logMenu(i):
@@ -100,22 +118,7 @@ def MainScreen():
 			print(msg)
 
 	elif userChoice == "3":
-		print("Opening Log...")
-		if len(client.logTarget) == 0:
-			print("\nNo messages in Log")
-			return True
-		for i in range(len(client.logTarget)):
-			print(i+1, ".")
-			print("To: " + str(client.logTarget[i]))
-			print("Message: \n" + client.logMessage[i])
-			print("---------------------------")
-
-
-		userChoice = int(input("Select a log message: "))
-		if 0 < userChoice <= len(client.logTarget):
-			logMenu(userChoice-1)
-		else:
-			print("That is not a valid choice, returning to Main Menu...")
+		openLog()
 
 	elif userChoice == "4":
 		return False
