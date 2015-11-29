@@ -15,5 +15,6 @@ def clientFunc(target, message):
     except KeyboardInterrupt:
         print("Killed.")
     finally:
+        pass
         sock.shutdown(socket.SHUT_RDWR)
         sock.close()
