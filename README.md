@@ -7,9 +7,9 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
 ###To Use
 Download all files (excluding docs)
 In your raspberryPi Terminal, type
->```
->python3 TauNet.py
->```
+```
+python3 TauNet.py
+```
 
 ####Current Settings
 - CipherSaber2 <- algorithm to output a stream of random numbers (run key scheduler 20 times after each message received / and transmitted)
