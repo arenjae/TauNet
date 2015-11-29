@@ -12,10 +12,10 @@ messages = []
 password = str.encode('password')
 
 PORT = 6283
-host = 'localhost'
+# host = 'localhost'
 
 
-# host = '192.168.1.141'
+host = '192.168.1.141'
 
 
 class server(threading.Thread):
@@ -54,10 +54,7 @@ def getMessage(conn):
 	buffer = b""
 	for s in readable:
 		while True:
-			temp = s.recv(256)
-			if temp:
-				buffer += temp
-			else:
-				s.close()
-				break;
-	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p"))
+			temp = s.recv(1024)
+			s.close()
+			break;
+	messages.append(protocol.decrypt(temp, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p"))

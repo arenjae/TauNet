@@ -58,3 +58,5 @@ TauNet is a simple protocol to send and receive encrypted messages over a privat
    
    
 ##Bugs
+ - Need error handling when a connection has an error (error 111)
+ - Need to make sure sockets are being closed after a connection is done
