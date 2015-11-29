@@ -2,8 +2,11 @@
 # Created with in collaboration with Graham Drakeley, drak2@pdx.edu
 # and Nathan Reed natreed@pdx.edu
 
+import protocol
 import socket
 
+logMessage = []
+logTarget = []
 def clientFunc(target, message):
     try:
         print("Connecting on {}:{}.".format(*target))
@@ -11,10 +14,16 @@ def clientFunc(target, message):
         sock.settimeout(3)
         sock.connect(target)
         sock.send(message)
+        sock.shutdown(socket.SHUT_RDWR)
 
     except KeyboardInterrupt:
         print("Killed.")
+
+    except:
+        print("TauNet node {}:{}".format(*target) + " is offline.")
+        print("Saving Message in Log...")
+        logMessage.append(protocol.decrypt(message,str.encode('password')))
+        logTarget.append(target)
+
     finally:
-        pass
-        sock.shutdown(socket.SHUT_RDWR)
         sock.close()

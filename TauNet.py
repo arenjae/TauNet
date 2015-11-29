@@ -13,7 +13,7 @@ PORT = 6283
 
 addressNames = []
 addressList = []
-log = []
+log = list
 addressFile = 'addresses.txt'
 strFrom = "from: rhatchet\r\n"
 strVersion = "version: v0.1\r\n"
@@ -48,13 +48,38 @@ def addressBookPopulate():
 	addressList.append('localhost')
 
 
+def logMenu(i):
+	print("---------Log Menu---------")
+	print("What would you like to do?")
+	print("1. Send Message")
+	print("2. Delete Message")
+	print("3. Cancel")
+	print("--------------------------")
+
+	userChoice = input(": ")
+	if userChoice == "1":
+		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + client.logMessage[i], password)
+		clientThread = threading.Thread(target=client.clientFunc, args=(client.logTarget[i], encryptedMessage))
+		clientThread.start()
+	elif userChoice == "2":
+		del client.logMessage[i]
+		del client.logTarget[i]
+	elif userChoice == "3":
+		return
+
+	else:
+		print("That is not a valid choice. Returning to Main Menu..")
+
+
 # Main Screen, user always returns to this screen
 def MainScreen():
+	print("--------------------------")
 	print("--------Main Menu---------")
 	print("What would you like to do?")
 	print("1. Send Message")
 	print("2. View Messages")
-	print("3. Quit")
+	print("3. View Message from Log")
+	print("4. Quit")
 	print("--------------------------")
 	userChoice = input(":")
 
@@ -72,15 +97,34 @@ def MainScreen():
 	elif userChoice == "2":
 		print("Viewing messages..")
 		for msg in server.messages:
-			print((msg))
+			print(msg)
 
 	elif userChoice == "3":
+		print("Opening Log...")
+		if len(client.logTarget) == 0:
+			print("\nNo messages in Log")
+			return True
+		for i in range(len(client.logTarget)):
+			print(i+1, ".")
+			print("To: " + str(client.logTarget[i]))
+			print("Message: \n" + client.logMessage[i])
+			print("---------------------------")
+
+
+		userChoice = int(input("Select a log message: "))
+		if 0 < userChoice <= len(client.logTarget):
+			logMenu(userChoice-1)
+		else:
+			print("That is not a valid choice, returning to Main Menu...")
+
+	elif userChoice == "4":
 		return False
 
 	else:
 		print("That is not a valid choice...")
 
 	return True
+
 
 # This is where the program really starts
 serverThread = server.server()

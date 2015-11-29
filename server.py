@@ -50,10 +50,10 @@ class server(threading.Thread):
 
 
 def getMessage(conn):
-	readable, writable, exceptional = select.select([conn], [], [])
+	readable, writable, exceptional = select.select([conn], [], [], 2)
 	buffer = b""
 	for s in readable:
 			buffer = s.recv(1024)
 			s.close()
-			break;
+			break
 	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p"))
