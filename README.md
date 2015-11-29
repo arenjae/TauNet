@@ -7,7 +7,7 @@ TauNet
 TauNet is a simple protocol to send and receive encrypted messages over a private network anywhere in the world.
 
 ###To Use
-Download all files (excluding docs)
+Download all files (excluding docs).
 In your raspberryPi Terminal, type
 ```
 python3 TauNet.py
