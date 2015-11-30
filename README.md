@@ -29,7 +29,7 @@ This program is currently compatible with the following TauNet implementations
 | cort        | wyeast.ddns.net      |
 | mrme        | mrme.ddns.net        |
 | echo        | barton.cs.pdx.edu    |
-
+| natreed     | natreed.ddns.net     |
    
    
 ##Bugs
