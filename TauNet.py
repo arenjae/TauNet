@@ -16,7 +16,7 @@ addressList = []
 log = list
 addressFile = 'addresses.txt'
 strFrom = "from: rhatchet\r\n"
-strVersion = "version: v0.2\r\n"
+strVersion = "version: 0.2\r\n"
 
 
 # address book
