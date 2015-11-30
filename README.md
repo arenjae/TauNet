@@ -28,6 +28,8 @@ This program is currently compatible with the following TauNet implementations
 | paolo2      | pirr.ddns.net        |
 | cort        | wyeast.ddns.net      |
 | mrme        | mrme.ddns.net        |
+| echo        | barton.cs.pdx.edu    |
+
    
    
 ##Bugs
