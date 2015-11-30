@@ -56,4 +56,4 @@ def getMessage(conn):
 			buffer = s.recv(1024)
 			s.close()
 			break
-	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p"))
+	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p\n"))
