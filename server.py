@@ -14,7 +14,8 @@ password = str.encode('password')
 PORT = 6283
 host = 'localhost'
 
-
+# Change this to whatever your local network ip address is
+# (if you have port forwarding enabled)
 # host = '192.168.1.141'
 
 
@@ -41,6 +42,7 @@ class server(threading.Thread):
 
 		except:
 			print("Lol you dieded")
+			print("(Check to make sure you have the right host entered)")
 
 		finally:
 			print("Closing socket.")
