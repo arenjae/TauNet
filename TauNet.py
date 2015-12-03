@@ -105,7 +105,7 @@ def MainScreen():
 		target = addressBook()
 
 		message = input("Type a message:")
-		while len(message.encode('utf-8')) > 94:  # restrict message to 94 bytes
+		while len(message.encode('utf-8')) > 934:  # restrict message to 94 bytes
 			message = input("Message is too long. \nType a message:")
 
 		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + message, password)
