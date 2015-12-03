@@ -14,6 +14,7 @@ password = str.encode('password')
 PORT = 6283
 host = 'localhost'
 
+
 # Change this to whatever your local network ip address is
 # (if you have port forwarding enabled)
 # host = '192.168.1.141'
@@ -55,7 +56,9 @@ def getMessage(conn):
 	readable, writable, exceptional = select.select([conn], [], [], 5)
 	buffer = b""
 	for s in readable:
-			buffer = s.recv(1024)
-			s.close()
-			break
-	messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p\n"))
+		buffer = s.recv(1024)
+		s.close()
+		break
+
+	if len(buffer) > 0:
+		messages.append(protocol.decrypt(buffer, password) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p\n"))
