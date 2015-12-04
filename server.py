@@ -61,7 +61,7 @@ def getMessage(conn):
 		break
 
 	if len(buffer) > 0:
-		messages.append(parseMessage(protocol.decrypt(buffer, password)) + '\n')
+		messages.append(parseMessage(protocol.decrypt(buffer, password)))
 
 
 def stripMessage(decryptedMessage):
@@ -98,7 +98,7 @@ def parseMessage(decryptedMessage):
 
 	strMessageList = str.split(strMessage, '\n')
 
-	parsedMessage = timestamp + strFrom + "> " + str(strMessageList[0])
+	parsedMessage = timestamp + strFrom + "| " + str(strMessageList[0])
 	blankSpace = ""
 
 	for i in range(len(timestamp)+len(strFrom)):
@@ -106,6 +106,6 @@ def parseMessage(decryptedMessage):
 
 	if len(strMessageList) > 1:
 		for i in range(1,len(strMessageList)):
-			parsedMessage += '\n' + blankSpace + '> ' + str(strMessageList[i])
+			parsedMessage += '\n' + blankSpace + '| ' + str(strMessageList[i])
 
 	return parsedMessage
