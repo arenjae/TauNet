@@ -61,10 +61,10 @@ def getMessage(conn):
 		break
 
 	if len(buffer) > 0:
-		messages.append(stripMessage(protocol.decrypt(buffer,password)) + '\n' + datetime.datetime.now().strftime("Received %A, %B %d, %Y at %I:%M%p\n"))
+		messages.append(datetime.datetime.now().strftime("%m/%d/%Y at %I:%M%p: ") + stripMessage(protocol.decrypt(buffer,password)) + '\n')
 
 def stripMessage(decryptedMessage):
-	decryptedMessage=str.split(decryptedMessage ,"\r\n")
+	decryptedMessage=str.split(decryptedMessage,"\r\n")
 	strFrom = str((decryptedMessage[1]).rsplit(":")[1])
 	strFrom=strFrom.strip()
 
@@ -73,4 +73,4 @@ def stripMessage(decryptedMessage):
 	for i in range(len(decryptedMessage)-3):
 		strMessage += str(decryptedMessage[3+i])
 
-	return strFrom + ": " + strMessage
+	return strFrom + "> " + strMessage
