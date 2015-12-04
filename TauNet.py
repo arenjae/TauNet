@@ -7,6 +7,7 @@ import client
 import threading
 import protocol
 from os import _exit
+import os
 
 password = str.encode('password')
 PORT = 6283
@@ -104,6 +105,7 @@ def MainScreen():
 	if userChoice == "1":
 		target = addressBook()
 
+		os.system('cls' if os.name == 'nt' else 'clear')
 		message = input("Type a message:")
 		while len(message.encode('utf-8')) > 934:  # restrict message to 934 bytes
 			message = input("Message is too long. \nType a message:")
