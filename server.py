@@ -61,7 +61,7 @@ def getMessage(conn):
 		break
 
 	if len(buffer) > 0:
-		messages.append(datetime.datetime.now().strftime("%m/%d/%Y at %I:%M%p: ") + stripMessage(protocol.decrypt(buffer, password)) + '\n')
+		messages.append(parseMessage(protocol.decrypt(buffer, password)) + '\n')
 
 
 def stripMessage(decryptedMessage):
@@ -69,15 +69,43 @@ def stripMessage(decryptedMessage):
 		return decryptedMessage
 
 	decryptedMessage = str.split(decryptedMessage, "\r\n")
-	strFrom = str((decryptedMessage[1]).rsplit(":")[1])
-	strFrom = strFrom.strip()
-	lenStrFrom = len(strFrom)
-	for i in range(12-lenStrFrom):
-		strFrom= " "+ strFrom
-
 	strMessage = ""
 
 	for i in range(len(decryptedMessage) - 3):
 		strMessage += str(decryptedMessage[3 + i])
 
-	return strFrom + "> " + strMessage
+	return strMessage
+
+def stripFrom(decryptedMessage):
+	if len(str.split(decryptedMessage, "\r\n")) < 4:
+		return ""
+
+	decryptedMessage = str.split(decryptedMessage, "\r\n")
+	strFrom = str((decryptedMessage[1]).rsplit(":")[1])
+	strFrom = strFrom.strip()
+	lenStrFrom = len(strFrom)
+	for i in range(12-lenStrFrom):
+		strFrom= " " + strFrom
+
+	return  strFrom
+
+def parseMessage(decryptedMessage):
+
+	# if strMessage has multiple lines, create extra lines for it
+	timestamp = datetime.datetime.now().strftime("%m/%d/%Y at %I:%M%p: ")
+	strMessage = stripMessage(decryptedMessage)
+	strFrom = stripFrom(decryptedMessage)
+
+	strMessageList = str.split(strMessage, '\n')
+
+	parsedMessage = timestamp + strFrom + "> " + str(strMessageList[0])
+	blankSpace = ""
+
+	for i in range(len(timestamp)+len(strFrom)):
+		blankSpace += " "
+
+	if len(strMessageList) > 1:
+		for i in range(1,len(strMessageList)):
+			parsedMessage += blankSpace + str(strMessageList[i])
+
+	return parsedMessage
