@@ -71,8 +71,9 @@ def stripMessage(decryptedMessage):
 	decryptedMessage = str.split(decryptedMessage, "\r\n")
 	strMessage = ""
 
-	for i in range(len(decryptedMessage) - 3):
-		strMessage += str(decryptedMessage[3 + i])
+	print (decryptedMessage)
+	for i in range(4,len(decryptedMessage)):
+		strMessage += '\n' + str(decryptedMessage[i])
 
 	return strMessage
 
@@ -98,14 +99,14 @@ def parseMessage(decryptedMessage):
 
 	strMessageList = str.split(strMessage, '\n')
 
-	parsedMessage = timestamp + strFrom + "| " + str(strMessageList[0])
+	parsedMessage = timestamp + strFrom + "| " + str(strMessageList[1])
 	blankSpace = ""
 
 	for i in range(len(timestamp)+len(strFrom)):
 		blankSpace += " "
 
 	if len(strMessageList) > 1:
-		for i in range(1,len(strMessageList)):
+		for i in range(2,len(strMessageList)):
 			parsedMessage += '\n' + blankSpace + '| ' + str(strMessageList[i])
 
 	return parsedMessage
