@@ -21,3 +21,12 @@ echo	barton.cs.pdx.edu
 mantron	mantron.ddns.net
 jojen2	itsjonnyjyo.ddns.net
 cort	wyeast.ddns.net
+rubear	131.252.211.242
+castlez	castlez.ddns.net
+waspxor	TBA
+quanah	quanah.duckdns.org
+mattTighe	matthewtighe.ddns.net
+jbrophy	jbrophy.ddns.net
+ph6	TBA
+zixuchen	TBD
+lukekaz9	198.29.41.107

@@ -30,6 +30,8 @@ This program is currently compatible with the following TauNet implementations
 | mrme        | mrme.ddns.net        |
 | echo        | barton.cs.pdx.edu    |
 | natreed     | natreed.ddns.net     |
+| jbucklin    | jbucklin.ddns.net    |
+| quanah      | quanah.duckdns.org   |
    
    
 ##Bugs
