@@ -106,6 +106,6 @@ def parseMessage(decryptedMessage):
 
 	if len(strMessageList) > 1:
 		for i in range(1,len(strMessageList)):
-			parsedMessage += blankSpace + str(strMessageList[i])
+			parsedMessage += '\n' + blankSpace + str(strMessageList[i])
 
 	return parsedMessage
