@@ -71,7 +71,6 @@ def stripMessage(decryptedMessage):
 	decryptedMessage = str.split(decryptedMessage, "\r\n")
 	strMessage = ""
 
-	print (decryptedMessage)
 	for i in range(4,len(decryptedMessage)):
 		strMessage += '\n' + str(decryptedMessage[i])
 
