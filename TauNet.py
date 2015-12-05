@@ -92,11 +92,11 @@ def logMenu(i):
 # Main Screen, user always returns to this screen
 def MainScreen():
 	print('{:-^100}'.format("Main Menu"))
-	print("What would you like to do?")
-	print("1. Send Message")
-	print("2. View Messages")
-	print("3. View Message from Log")
-	print("4. Quit")
+	print('{:^100}'.format("What would you like to do?"))
+	print('{:^100}'.format('{:<25}'.format("1. Send Message")))
+	print('{:^100}'.format('{:<25}'.format("2. View Messages")))
+	print('{:^100}'.format('{:<25}'.format("3. View Message from Log")))
+	print('{:^100}'.format('{:<25}'.format("4. Quit")))
 	print('{:-^100}'.format(""))
 	userChoice = input(":")
 
