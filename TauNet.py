@@ -19,7 +19,6 @@ addressFile = 'addresses.txt'
 strFrom = "from: rhatchet\r\n"
 strVersion = "version: 0.2\r\n"
 
-
 # address book
 def addressBook():
 	for i in range(len(addressNames)):
@@ -92,14 +91,13 @@ def logMenu(i):
 
 # Main Screen, user always returns to this screen
 def MainScreen():
-	print("--------------------------")
-	print("--------Main Menu---------")
+	print('{:-^100}'.format("Main Menu"))
 	print("What would you like to do?")
 	print("1. Send Message")
 	print("2. View Messages")
 	print("3. View Message from Log")
 	print("4. Quit")
-	print("--------------------------")
+	print('{:-^100}'.format(""))
 	userChoice = input(":")
 
 	if userChoice == "1":

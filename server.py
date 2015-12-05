@@ -9,11 +9,11 @@ import select
 import datetime
 
 messages = []
+lastDay = []
 password = str.encode('password')
 
 PORT = 6283
 host = 'localhost'
-
 
 # Change this to whatever your local network ip address is
 # (if you have port forwarding enabled)
@@ -21,6 +21,7 @@ host = 'localhost'
 
 
 class server(threading.Thread):
+
 	def run(self):
 
 		print("Server Started...")
@@ -61,6 +62,7 @@ def getMessage(conn):
 		break
 
 	if len(buffer) > 0:
+		newDay()
 		messages.append(parseMessage(protocol.decrypt(buffer, password)))
 
 
@@ -87,12 +89,13 @@ def stripFrom(decryptedMessage):
 	for i in range(12-lenStrFrom):
 		strFrom= " " + strFrom
 
-	return  strFrom
+	return strFrom
+
 
 def parseMessage(decryptedMessage):
 
 	# if strMessage has multiple lines, create extra lines for it
-	timestamp = datetime.datetime.now().strftime("%m/%d/%Y at %I:%M%p: ")
+	timestamp = datetime.datetime.now().strftime("%I:%M%p: ")
 	strMessage = stripMessage(decryptedMessage)
 	strFrom = stripFrom(decryptedMessage)
 
@@ -109,3 +112,14 @@ def parseMessage(decryptedMessage):
 			parsedMessage += '\n' + blankSpace + '| ' + str(strMessageList[i])
 
 	return parsedMessage
+
+def newDay():
+	today = '{:-^100}'.format(datetime.datetime.now().strftime("%A, %B %d, %Y"))
+
+	if len(lastDay)==0:
+		lastDay.append(today)
+		messages.append(today)
+
+	if lastDay[0] != today:
+		lastDay[0] = today
+		messages.append(today)
