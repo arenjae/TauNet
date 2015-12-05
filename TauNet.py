@@ -18,11 +18,12 @@ log = list
 addressFile = 'addresses.txt'
 strFrom = "from: rhatchet\r\n"
 strVersion = "version: 0.2\r\n"
+addressNamesWithNumbers = []
 
 # address book
 def addressBook():
 	lenOfList = int(len(addressNames)/3)
-	for a,b,c in zip(addressNames[0:lenOfList],addressNames[lenOfList:lenOfList*2],addressNames[lenOfList*2:len(addressNames)]):
+	for a,b,c in zip(addressNamesWithNumbers[0:lenOfList],addressNamesWithNumbers[lenOfList:lenOfList*2],addressNamesWithNumbers[lenOfList*2:len(addressNames)]):
 		print('{:<30}{:<30}{:<}'.format(a,b,c))
 
 
@@ -45,9 +46,11 @@ def addressBookPopulate():
 			count += 1
 	for i in range(count):
 		b = addressBook[i].split()
-		addressNames.append(str(i+1) + ". " + b[0])
+		addressNamesWithNumbers.append(str(i+1) + ". " + b[0])
+		addressNames.append(b[0])
 		addressList.append(b[1])
-	addressNames.append(str(i+2) + ". Test")
+	addressNamesWithNumbers.append(str(i+2) + ". Test")
+	addressNames.append("Test")
 	addressList.append('localhost')
 
 def openLog():
