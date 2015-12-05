@@ -15,6 +15,7 @@ def clientFunc(target, message):
         sock.connect(target)
         sock.send(message)
         sock.shutdown(socket.SHUT_RDWR)
+        print("Message sent successfully!")
 
     except KeyboardInterrupt:
         print("Killed.")
