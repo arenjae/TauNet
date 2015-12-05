@@ -9,8 +9,7 @@ logMessage = []
 logTarget = []
 def clientFunc(target, message):
     try:
-        print("Connecting on {}:{}.".format(*target))
-        print("Message sent!")
+        print("Message sent to {}:{}.".format(*target))
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(10)
         sock.connect(target)
