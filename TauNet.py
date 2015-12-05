@@ -21,8 +21,10 @@ strVersion = "version: 0.2\r\n"
 
 # address book
 def addressBook():
-	for i in range(len(addressNames)):
-		print(i + 1, ". ", addressNames[i])
+	for a,b,c in zip(addressNames[::3],addressNames[1::3],addressNames[2::3]):
+		print('{:<30}{:<30}{:<}'.format(a,b,c))
+
+
 	intTarget = int(input("Choose a person to send a message to: "))
 	target = (addressList[intTarget - 1], PORT)
 
@@ -42,9 +44,9 @@ def addressBookPopulate():
 			count += 1
 	for i in range(count):
 		b = addressBook[i].split()
-		addressNames.append(b[0])
+		addressNames.append(str(i+1) + ". " + b[0])
 		addressList.append(b[1])
-	addressNames.append('Test')
+	addressNames.append(str(i+2) + ". Test")
 	addressList.append('localhost')
 
 def openLog():
