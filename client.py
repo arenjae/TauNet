@@ -10,12 +10,12 @@ logTarget = []
 def clientFunc(target, message):
     try:
         print("Connecting on {}:{}.".format(*target))
+        print("Message sent!")
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(10)
         sock.connect(target)
         sock.send(message)
         sock.shutdown(socket.SHUT_RDWR)
-        print("Message sent successfully!")
 
     except KeyboardInterrupt:
         print("Killed.")

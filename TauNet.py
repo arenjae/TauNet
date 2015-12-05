@@ -21,7 +21,8 @@ strVersion = "version: 0.2\r\n"
 
 # address book
 def addressBook():
-	for a,b,c in zip(addressNames[::3],addressNames[1::3],addressNames[2::3]):
+	lenOfList = int(len(addressNames)/3)
+	for a,b,c in zip(addressNames[0:lenOfList],addressNames[lenOfList:lenOfList*2],addressNames[lenOfList*2:len(addressNames)]):
 		print('{:<30}{:<30}{:<}'.format(a,b,c))
 
 
