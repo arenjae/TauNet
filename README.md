@@ -21,18 +21,19 @@ python3 TauNet.py
 ###Current Compatibility
 This program is currently compatible with the following TauNet implementations
 
-| username    | address              | 
-| ----------- | -------------------- |
-| tdulcet     | tealdulcet.ddns.net  |
-| chupacabra  | chupa-cabra.ddns.net |
-| paolo2      | pirr.ddns.net        |
-| cort        | wyeast.ddns.net      |
-| mrme        | mrme.ddns.net        |
-| echo        | barton.cs.pdx.edu    |
-| natreed     | natreed.ddns.net     |
-| jbucklin    | jbucklin.ddns.net    |
-| quanah      | quanah.duckdns.org   |
-   
+| username    | address                     | 
+| ----------- | --------------------------- |
+| tdulcet     | tealdulcet.ddns.net         |
+| chupacabra  | chupa-cabra.ddns.net        |
+| paolo2      | pirr.ddns.net               |
+| cort        | wyeast.ddns.net             |
+| mrme        | mrme.ddns.net               |
+| echo        | barton.cs.pdx.edu           |
+| natreed     | natreed.ddns.net            |
+| jbucklin    | jbucklin.ddns.net           |
+| quanah      | quanah.duckdns.org          |
+| pyrrh       | souffle.chiliahedron.com    |
+| jbrophy     | jbrophy.ddns.net            |
    
 ##Bugs
-- None so far!
+- Choosing an number not in range of the address book when picking an address breaks program...
