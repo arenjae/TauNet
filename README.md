@@ -34,6 +34,9 @@ This program is currently compatible with the following TauNet implementations
 | quanah      | quanah.duckdns.org          |
 | pyrrh       | souffle.chiliahedron.com    |
 | jbrophy     | jbrophy.ddns.net            |
+
+###Preview
+![alt text](https://github.com/earthshine0/TauNet/blob/master/Capture.JPG "TauNet Preview")
    
 ##Bugs
 - Choosing an number not in range of the address book when picking an address breaks program...
