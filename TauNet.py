@@ -20,12 +20,12 @@ strFrom = "from: rhatchet\r\n"
 strVersion = "version: 0.2\r\n"
 addressNamesWithNumbers = []
 
+
 # address book
 def addressBook():
-	lenOfList = int(len(addressNames)/3)
-	for a,b,c in zip(addressNamesWithNumbers[0:lenOfList],addressNamesWithNumbers[lenOfList:lenOfList*2],addressNamesWithNumbers[lenOfList*2:len(addressNames)]):
-		print('{:<30}{:<30}{:<}'.format(a,b,c))
-
+	lenOfList = int(len(addressNames) / 3)
+	for a, b, c in zip(addressNamesWithNumbers[0:lenOfList], addressNamesWithNumbers[lenOfList:lenOfList * 2], addressNamesWithNumbers[lenOfList * 2:len(addressNames)]):
+		print('{:<30}{:<30}{:<}'.format(a, b, c))
 
 	intTarget = int(input("Choose a person to send a message to: "))
 	target = (addressList[intTarget - 1], PORT)
@@ -46,12 +46,13 @@ def addressBookPopulate():
 			count += 1
 	for i in range(count):
 		b = addressBook[i].split()
-		addressNamesWithNumbers.append(str(i+1) + ". " + b[0])
+		addressNamesWithNumbers.append(str(i + 1) + ". " + b[0])
 		addressNames.append(b[0])
 		addressList.append(b[1])
-	addressNamesWithNumbers.append(str(i+2) + ". Test")
+	addressNamesWithNumbers.append(str(i + 2) + ". Test")
 	addressNames.append("Test")
 	addressList.append('localhost')
+
 
 def openLog():
 	print("Opening Log...")
@@ -59,15 +60,14 @@ def openLog():
 		print("\nNo messages in Log")
 		return
 	for i in range(len(client.logTarget)):
-		print(i+1, ".")
+		print(i + 1, ".")
 		print("To: " + str(client.logTarget[i]))
 		print("Message: \n" + client.logMessage[i])
 		print("---------------------------")
 
-
 	userChoice = int(input("Select a log message: "))
 	if 0 < userChoice <= len(client.logTarget):
-		logMenu(userChoice-1)
+		logMenu(userChoice - 1)
 	else:
 		print("That is not a valid choice, returning to Main Menu...")
 
