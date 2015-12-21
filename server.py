@@ -1,6 +1,4 @@
 # Copyright (C) 2015 Rachael Johnson arenjae.com, email: rj@arenjae.com
-# Created with in collaboration with Graham Drakeley, drak2@pdx.edu
-# and Nathan Reed natreed@pdx.edu
 
 import socket
 import protocol
@@ -9,11 +7,8 @@ import select
 import datetime
 
 messages = []
-lastDay = []
-password = str.encode('password')
+lastDay = str
 
-PORT = 6283
-host = 'localhost'
 
 # Change this to whatever your local network ip address is
 # (if you have port forwarding enabled)
@@ -21,11 +16,16 @@ host = 'localhost'
 
 
 class server(threading.Thread):
+	def __init__(self, host, port, password):
+		super().__init__()
+		self.host_pair = (host, port)
+		self.password = password
 
 	def run(self):
-
 		print("Server Started...")
-		self.host_pair = (host, PORT)
+
+		host2 = "localhost"
+		PORT = 6283
 
 		try:
 			print("Listening on {}:{}.".format(*self.host_pair))
@@ -37,7 +37,7 @@ class server(threading.Thread):
 
 			while True:
 				conn, sender = listener.accept()
-				threading.Thread(target=getMessage, args=(conn,)).start()
+				threading.Thread(target=getMessage, args=(conn, self.password)).start()
 
 		except KeyboardInterrupt:
 			print("Killed.")
@@ -53,7 +53,7 @@ class server(threading.Thread):
 				conn.close()
 
 
-def getMessage(conn):
+def getMessage(conn, password):
 	readable, writable, exceptional = select.select([conn], [], [], 5)
 	buffer = b""
 	for s in readable:
@@ -73,10 +73,11 @@ def stripMessage(decryptedMessage):
 	decryptedMessage = str.split(decryptedMessage, "\r\n")
 	strMessage = ""
 
-	for i in range(4,len(decryptedMessage)):
+	for i in range(4, len(decryptedMessage)):
 		strMessage += '\n' + str(decryptedMessage[i])
 
 	return strMessage
+
 
 def stripFrom(decryptedMessage):
 	if len(str.split(decryptedMessage, "\r\n")) < 4:
@@ -86,14 +87,13 @@ def stripFrom(decryptedMessage):
 	strFrom = str((decryptedMessage[1]).rsplit(":")[1])
 	strFrom = strFrom.strip()
 	lenStrFrom = len(strFrom)
-	for i in range(12-lenStrFrom):
-		strFrom= " " + strFrom
+	for i in range(12 - lenStrFrom):
+		strFrom = " " + strFrom
 
 	return strFrom
 
 
 def parseMessage(decryptedMessage):
-
 	# if strMessage has multiple lines, create extra lines for it
 	timestamp = datetime.datetime.now().strftime("%I:%M%p: ")
 	strMessage = stripMessage(decryptedMessage)
@@ -104,22 +104,20 @@ def parseMessage(decryptedMessage):
 	parsedMessage = timestamp + strFrom + "| " + str(strMessageList[1])
 	blankSpace = ""
 
-	for i in range(len(timestamp)+len(strFrom)):
+	for i in range(len(timestamp) + len(strFrom)):
 		blankSpace += " "
 
 	if len(strMessageList) > 1:
-		for i in range(2,len(strMessageList)):
+		for i in range(2, len(strMessageList)):
 			parsedMessage += '\n' + blankSpace + '| ' + str(strMessageList[i])
 
 	return parsedMessage
 
+
 def newDay():
+	global lastDay
 	today = '{:-^100}'.format(datetime.datetime.now().strftime("%A, %B %d, %Y"))
 
-	if len(lastDay)==0:
-		lastDay.append(today)
-		messages.append(today)
-
-	if lastDay[0] != today:
-		lastDay[0] = today
+	if lastDay != today:
+		lastDay = today
 		messages.append(today)

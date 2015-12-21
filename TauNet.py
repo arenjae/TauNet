@@ -1,26 +1,42 @@
 # Copyright (C) 2015 Rachael Johnson arenjae.com, email: rj@arenjae.com
-# Created with in collaboration with Graham Drakeley, drak2@pdx.edu
-# and Nathan Reed natreed@pdx.edu
 
 import server
 import client
 import threading
 import protocol
-from os import _exit
 import os
+from os import _exit
 
-password = str.encode('password')
-PORT = 6283
+PORT = int
+PASSWORD = str
+USERNAME = str
+HOST = str
+
 
 addressNames = []
 addressList = []
 log = list
+settingFileAddress = "settings.ini"
 addressFile = 'addresses.txt'
-strFrom = "from: rhatchet\r\n"
 strVersion = "version: 0.2\r\n"
+strFrom = str
 addressNamesWithNumbers = []
 
+# get settings from settings.ini file
+def getSettings():
+	global PORT, PASSWORD, USERNAME, HOST
+	global strFrom
 
+	with open(settingFileAddress, 'r') as f:
+		settingsIn = f.readlines()
+
+	PORT = int(settingsIn[0].rsplit(":")[1].strip())
+	PASSWORD = str.encode(settingsIn[1].rsplit(":")[1].strip())
+	USERNAME = settingsIn[2].rsplit(":")[1].strip()
+	HOST = settingsIn[3].rsplit(":")[1].strip()
+
+	strFrom = "from: " + USERNAME + "\r\n"
+	
 # address book
 def addressBook():
 	lenOfList = int(len(addressNames) / 3)
@@ -82,7 +98,7 @@ def logMenu(i):
 
 	userChoice = input(": ")
 	if userChoice == "1":
-		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + client.logMessage[i], password)
+		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + client.logMessage[i], PASSWORD)
 		clientThread = threading.Thread(target=client.clientFunc, args=(client.logTarget[i], encryptedMessage))
 		clientThread.start()
 	elif userChoice == "2":
@@ -114,7 +130,7 @@ def MainScreen():
 		while len(message.encode('utf-8')) > 934:  # restrict message to 934 bytes
 			message = input("Message is too long. \nType a message:")
 
-		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + message, password)
+		encryptedMessage = protocol.encrypt(strVersion + strFrom + strTo + '\r\n' + message, PASSWORD)
 		clientThread = threading.Thread(target=client.clientFunc, args=(target, encryptedMessage))
 		clientThread.start()
 
@@ -136,7 +152,8 @@ def MainScreen():
 
 
 # This is where the program really starts
-serverThread = server.server()
+getSettings()
+serverThread = server.server(HOST, PORT, PASSWORD)
 serverThread.start()
 addressBookPopulate()
 
