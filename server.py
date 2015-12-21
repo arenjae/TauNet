@@ -24,9 +24,6 @@ class server(threading.Thread):
 	def run(self):
 		print("Server Started...")
 
-		host2 = "localhost"
-		PORT = 6283
-
 		try:
 			print("Listening on {}:{}.".format(*self.host_pair))
 			conn = None
